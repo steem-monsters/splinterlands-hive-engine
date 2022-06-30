@@ -49,11 +49,11 @@ export class TokensContractsApi {
         return this.contracts.getContract(this.key);
     }
 
-    public getBalanceByAccount(account: string, symbol: AssetSymbol): Promise<TokenBalance> {
+    public getAccountBalance(account: string, symbol: AssetSymbol): Promise<TokenBalance> {
         return this.contracts.findOne(this.key, 'balances', { account, symbol });
     }
 
-    public getBalancesByAccount(account: string, symbols: AssetSymbol[], options?: ContractsOptions): Promise<TokenBalance[]> {
+    public getAccountBalances(account: string, symbols: AssetSymbol[], options?: ContractsOptions): Promise<TokenBalance[]> {
         return this.contracts.find(this.key, 'balances', { account, symbol: { $in: symbols } }, options);
     }
 

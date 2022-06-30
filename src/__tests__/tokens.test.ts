@@ -13,7 +13,7 @@ describe('tokens', () => {
         const account = 'aggroed';
         const symbol = 'BEE';
         const client = new Client(RPC_NODE);
-        const response = await client.tokens.getBalanceByAccount(account, symbol);
+        const response = await client.tokens.getAccountBalance(account, symbol);
         expect(response.account).toEqual(account);
         expect(response.symbol).toEqual(symbol);
     });
@@ -22,7 +22,7 @@ describe('tokens', () => {
         const account = 'aggroed';
         const symbols = ['SWAP.HIVE', 'BEE'];
         const client = new Client(RPC_NODE);
-        const response = await client.tokens.getBalancesByAccount(account, symbols);
+        const response = await client.tokens.getAccountBalances(account, symbols);
         expect(response[0].symbol).toEqual('SWAP.HIVE');
         expect(response[1].symbol).toEqual('BEE');
     });
