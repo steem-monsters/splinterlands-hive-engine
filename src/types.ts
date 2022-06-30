@@ -4,5 +4,5 @@ export type AssetSymbol = 'SWAP.HIVE' | 'BEE' | 'DEC' | 'ALPHA' | 'BETA' | 'UNTA
 
 export interface Request {
     method: MethodName;
-    params?: Object;
+    params?: Record<string, any>;
 }

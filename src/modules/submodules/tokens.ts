@@ -41,27 +41,25 @@ export interface PendingUndelegations {
 }
 
 export class TokensContractsApi {
-    private key: string = 'tokens';
-
     constructor(private readonly contracts: ContractsApi) {}
 
     public getContract() {
-        return this.contracts.getContract(this.key);
+        return this.contracts.getContract('tokens');
     }
 
     public getAccountBalance(account: string, symbol: AssetSymbol): Promise<TokenBalance> {
-        return this.contracts.findOne(this.key, 'balances', { account, symbol });
+        return this.contracts.findOne('tokens', 'balances', { account, symbol });
     }
 
     public getAccountBalances(account: string, symbols: AssetSymbol[], options?: ContractsOptions): Promise<TokenBalance[]> {
-        return this.contracts.find(this.key, 'balances', { account, symbol: { $in: symbols } }, options);
+        return this.contracts.find('tokens', 'balances', { account, symbol: { $in: symbols } }, options);
     }
 
     public getBalances(query: any = {}, options?: ContractsOptions): Promise<TokenBalance[]> {
-        return this.contracts.find(this.key, 'balances', query, options);
+        return this.contracts.find('tokens', 'balances', query, options);
     }
 
     public getTokens(options?: ContractsOptions) {
-        return this.contracts.find(this.key, 'tokens', {}, options);
+        return this.contracts.find('tokens', 'tokens', {}, options);
     }
 }
