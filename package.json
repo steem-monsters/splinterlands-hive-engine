@@ -1,8 +1,14 @@
 {
     "name": "splinterlands-hive-engine",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Lighweight library to interact with Hive Engine Sidechain",
-    "main": "dist/index.js",
+    "main": "dist/engine.js",
+    "module": "dist/engine.esm.js",
+    "typings": "dist/engine.d.ts",
+    "browser": {
+        "./dist/engine.js": "./dist/engine.browser.js",
+        "./dist/engine.esm.js": "./dist/engine.browser.esm.js"
+    },
     "files": [
         "dist"
     ],
@@ -11,9 +17,8 @@
         "url": "https://github.com/steem-monsters/splinterlands-hive-engine"
     },
     "scripts": {
-        "prepublishOnly": "npm run lint:fix && npm run build",
-        "build": "rimraf dist && rimraf tsconfig.tsbuildinfo && tsc",
-        "build:rollup": "npm run build:cjs && npm run build:umd && npm run build:umd:min",
+        "prepublishOnly": "npm run lint:fix && npm run build && npm run test",
+        "build": "rimraf dist && rimraf tsconfig.tsbuildinfo && rollup -c",
         "build:watch": "tsc -w",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
@@ -22,7 +27,6 @@
         "build:cjs": "cross-env BUILD_TYPE=cjs rollup -c -o lib/ssc.js",
         "build:umd": "cross-env BUILD_TYPE=umd rollup -c -o dist/ssc.js",
         "build:umd:min": "cross-env NODE_ENV=production BUILD_TYPE=umd rollup -c -o dist/ssc.min.js",
-        "prepublish": "npm run build",
         "dev": "NODE_ENV=development ts-node-dev --tree-kill --no-notify --respawn --transpile-only example/example.ts"
     },
     "keywords": [],
@@ -39,21 +43,15 @@
         "@types/node": "^18.0.0",
         "@typescript-eslint/eslint-plugin": "^5.30.0",
         "@typescript-eslint/parser": "^5.30.0",
-        "babel-core": "^6.26.3",
-        "babel-plugin-external-helpers": "^6.22.0",
-        "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "babel-preset-env": "^1.7.0",
         "cross-env": "^5.1.1",
         "eslint": "^8.18.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
         "jest": "^28.1.2",
         "prettier": "^2.7.1",
-        "rollup": "^0.62.0",
-        "rollup-plugin-babel": "^3.0.5",
-        "rollup-plugin-node-resolve": "^3.3.0",
-        "rollup-plugin-regenerator": "^0.6.0",
-        "rollup-plugin-uglify": "^4.0.0",
+        "rollup": "^2.75.7",
+        "rollup-plugin-dts": "^4.2.2",
+        "rollup-plugin-esbuild": "^4.9.1",
         "ts-jest": "^28.0.5",
         "ts-node-dev": "^2.0.0"
     }
